@@ -29,6 +29,14 @@ Route::get('/login', [UserController::class, 'getLogin']);
 
 Route::get('/sign-up', [UserController::class, 'getSignUp'])->name('user.signup');
 Route::post('/sign-up', [UserController::class, 'postSignUp']);
+Route::post('conflict', function (){
+    dd('test');
+});
+
+//gsdkjhfksdhkf
+//lsdhlkasdlk
+//klsdaflkdsflk
+//sa;lfd;intlcal_set_minimal_days_in_first_week()
 
 /*dfoshfhsdfhsdk
 dshflksdhflksdhlfk
@@ -40,4 +48,3 @@ Route::get ('conf2', function (){
 });
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar
-//commit 2 test

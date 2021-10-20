@@ -32,3 +32,4 @@ Route::post('/sign-up', [UserController::class, 'postSignUp']);
 
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar
+//commit 2 test

@@ -30,6 +30,14 @@ Route::get('/login', [UserController::class, 'getLogin']);
 Route::get('/sign-up', [UserController::class, 'getSignUp'])->name('user.signup');
 Route::post('/sign-up', [UserController::class, 'postSignUp']);
 
+/*dfoshfhsdfhsdk
+dshflksdhflksdhlfk
+jdskahkfhkjsdf
+ds;fjdsklfldskf*/
+
+Route::get ('conf2', function (){
+   dd(6);
+});
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar
 //commit 2 test

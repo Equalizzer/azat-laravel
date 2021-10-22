@@ -24,27 +24,13 @@ Route::get('/home', function () {
 use App\Http\Controllers\UserController;
 
 
-Route::post('/login',[UserController::class, 'postLogin'] );
+Route::post('/login',[UserController::class, 'postLogin'] ) ->name('login');
 Route::get('/login', [UserController::class, 'getLogin']);
 
 Route::get('/sign-up', [UserController::class, 'getSignUp'])->name('user.signup');
 Route::post('/sign-up', [UserController::class, 'postSignUp']);
-Route::post('conflict', function (){
-    dd('test');
-});
 
-//gsdkjhfksdhkf
-//lsdhlkasdlk
-//klsdaflkdsflk
-//sa;lfd;intlcal_set_minimal_days_in_first_week()
+Route::get('users' , [UserController::class, 'getUsers'])->name('users.list');
 
-/*dfoshfhsdfhsdk
-dshflksdhflksdhlfk
-jdskahkfhkjsdf
-ds;fjdsklfldskf*/
-
-Route::get ('conf2', function (){
-   dd(6);
-});
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar

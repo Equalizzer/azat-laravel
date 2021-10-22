@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -28,7 +29,16 @@ class UserController extends Controller
     public function postSignUp(Request $request)
     {
         $data = $request->only('name','email', 'password');
-        dd($data);
+        $user = User::create($data);
+        return redirect()->route('login')->with('success', 'You have successfully sign up');
+    }
+
+    public function getUsers()
+    {
+        $users = User::get();    //talisa collection
+        return view('users-list', [
+            'users' => $users
+        ] );
     }
 }
 

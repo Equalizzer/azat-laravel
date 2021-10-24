@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\products;
 
 class UserController extends Controller
 {
@@ -39,6 +40,29 @@ class UserController extends Controller
         return view('users-list', [
             'users' => $users
         ] );
+    }
+
+    public function getProducts()
+    {
+        return view('products');
+    }
+
+    public function postProducts(Request $request)
+    {
+        $data = $request->only('name','price');
+        $products = Products::create($data);
+        dd($products);
+//        return redirect()->route('savedProducts')->with('success', 'You have successfully saved your product');
+    }
+
+    public function getSavedProducts()
+    {
+        $products = Products::get();
+
+        return view("savedProducts",[
+            'products' => $products
+        ]);
+
     }
 }
 

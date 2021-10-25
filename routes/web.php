@@ -32,9 +32,9 @@ Route::post('/sign-up', [UserController::class, 'postSignUp']);
 
 Route::get('users' , [UserController::class, 'getUsers'])->name('users.list');
 
-Route::get('/products',[UserController::class,'getProducts'])->name('saved.products');
+Route::get('/products',[UserController::class,'getProducts'])->name('products');
 Route::post('/products', [UserController::class,'postProducts']) ;
-Route::get('savedProducts', [UserController::class,'getSavedProducts']) ;
+Route::get('/savedProducts', [UserController::class,'getSavedProducts'])->name('savedProducts') ;
 
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar

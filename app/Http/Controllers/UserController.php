@@ -19,7 +19,6 @@ class UserController extends Controller
     public function postLogin(Request $request)
     {
         $data = $request->only('email', 'password');
-        dd($data);
     }
 
     public function getSignUp()
@@ -51,8 +50,7 @@ class UserController extends Controller
     {
         $data = $request->only('name','price');
         $products = Products::create($data);
-        dd($products);
-//        return redirect()->route('savedProducts')->with('success', 'You have successfully saved your product');
+        return redirect()->route('products')->with('success', 'You have successfully saved your product');
     }
 
     public function getSavedProducts()

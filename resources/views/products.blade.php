@@ -8,6 +8,16 @@
     <title>Document</title>
 </head>
 <body style="background-color: #6b7280; position: relative">
+
+@if(Session::has('success'))
+    <div style="display: flex; justify-content: center">
+        {{Session::get('success')}}
+    </div>
+    <div style="display: flex; justify-content: center">
+        <a href="{{route('savedProducts')}}">Go to saved products</a>
+    </div>
+    <br>
+@endif
 <form action="/products" method="POST" style="display: flex;justify-content: center;">
     @csrf
     <input type="name" name="name" placeholder="Name">

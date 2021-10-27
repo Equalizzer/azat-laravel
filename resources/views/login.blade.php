@@ -9,11 +9,7 @@
 </head>
     <body style="background-color: #6b7280; position: relative">
 
-        @if(Session::has('success'))
-            <div>
-                {{Session::get('success')}}
-            </div>
-        @endif
+        @include('includes.messages')
 
         <form action="/login" method="POST" style="display: flex;justify-content: center;">
             @csrf

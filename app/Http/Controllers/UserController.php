@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\products;
+use App\Http\Requests\CreateUsersRequest;
+use App\Http\Requests\CreateProductsRequest;
 
 class UserController extends Controller
 {
@@ -26,9 +28,16 @@ class UserController extends Controller
         return view('sign-up');
     }
 
-    public function postSignUp(Request $request)
+    public function postSignUp(CreateUsersRequest $request)
     {
-        $data = $request->only('name','email', 'password');
+//        $validated = $request->validate([
+//            'name'=> 'required|min:3|max:64',
+//            'email'=> 'required|email',
+//            'password'=> 'required|min:4'
+//        ]);
+//        dd($validated);
+
+        $data = $request->validated();
         $user = User::create($data);
         return redirect()->route('login')->with('success', 'You have successfully sign up');
     }
@@ -46,9 +55,9 @@ class UserController extends Controller
         return view('products');
     }
 
-    public function postProducts(Request $request)
+    public function postProducts(CreateProductsRequest $request)
     {
-        $data = $request->only('name','price');
+        $data = $request->validated();
         $products = Products::create($data);
         return redirect()->route('products')->with('success', 'You have successfully saved your product');
     }

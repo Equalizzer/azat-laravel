@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\products;
 use App\Http\Requests\CreateUsersRequest;
 use App\Http\Requests\CreateProductsRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,6 +22,12 @@ class UserController extends Controller
     public function postLogin(Request $request)
     {
         $data = $request->only('email', 'password');
+
+        if (Auth::attempt($data)) {
+            return redirect()->route('feed');
+        } else {
+            return redirect()->back()->with('error', 'Invalid email or password');
+        }
     }
 
     public function getSignUp()
@@ -38,6 +45,9 @@ class UserController extends Controller
 //        dd($validated);
 
         $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
+
+
         $user = User::create($data);
         return redirect()->route('login')->with('success', 'You have successfully sign up');
     }
@@ -47,7 +57,7 @@ class UserController extends Controller
         $users = User::get();    //talisa collection
         return view('users-list', [
             'users' => $users
-        ] );
+        ]);
     }
 
     public function getProducts()
@@ -66,7 +76,7 @@ class UserController extends Controller
     {
         $products = Products::get();
 
-        return view("savedProducts",[
+        return view("savedProducts", [
             'products' => $products
         ]);
 

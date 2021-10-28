@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Middleware\EnsureTokenIsValid;
+use App\Http\Controllers\UserController;
+use Illuminate\Session\Middleware\AuthenticateSession;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,28 +24,32 @@ Route::get('/home', function () {
     return view('admin.home');
 });
 
-use App\Http\Controllers\UserController;
+
+
 
 //Login
-Route::post('/login',[UserController::class, 'postLogin'] ) ->name('login');
+Route::post('/login', [UserController::class, 'postLogin'])->name('login');
 Route::get('/login', [UserController::class, 'getLogin']);
 
 //Sign-up
 Route::get('/sign-up', [UserController::class, 'getSignUp'])->name('user.signup');
 Route::post('/sign-up', [UserController::class, 'postSignUp']);
 
-//Users-list
-Route::get('users' , [UserController::class, 'getUsers'])->name('users.list');
 
 
-//Products
-Route::get('/products',[UserController::class,'getProducts'])->name('products');
-Route::post('/products', [UserController::class,'postProducts']) ;
-Route::get('/savedProducts', [UserController::class,'getSavedProducts'])->name('savedProducts') ;
+Route::middleware('auth')->group(function () {
+    //Products
+    Route::get('/products', [UserController::class, 'getProducts'])->name('products');
+    Route::post('/products', [UserController::class, 'postProducts']);
+    Route::get('/savedProducts', [UserController::class, 'getSavedProducts'])->name('savedProducts');
+    //Feed
+    Route::get('feed', [DashboardController::class, 'getFeed'])->name('feed');
+    //Users-list
+    Route::get('users', [UserController::class, 'getUsers'])->name('users.list');
+});
 
-
-
-Route::get('feed', [DashboardController::class,'getFeed'])->name('feed');
+//Log out
+Route::post('/login', [AuthenticateSession::class, 'logOut']);
 
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar

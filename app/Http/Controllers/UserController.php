@@ -24,7 +24,7 @@ class UserController extends Controller
         $data = $request->only('email', 'password');
 
         if (Auth::attempt($data)) {
-            return redirect()->route('feed');
+            return redirect()->back()->with('success', 'You have successfully loged in');
         } else {
             return redirect()->back()->with('error', 'Invalid email or password');
         }
@@ -54,7 +54,7 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        $users = User::get();    //talisa collection
+        $users = User::get();                                 //talisa collection
         return view('users-list', [
             'users' => $users
         ]);
@@ -69,7 +69,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $products = Products::create($data);
-        return redirect()->route('products')->with('success', 'You have successfully saved your product');
+        return redirect()->route('savedProducts')->with('success', 'You have successfully saved your product');
     }
 
     public function getSavedProducts()
@@ -80,6 +80,17 @@ class UserController extends Controller
             'products' => $products
         ]);
 
+    }
+
+    public function logOut(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('login');
     }
 }
 

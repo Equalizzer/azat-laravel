@@ -9,12 +9,14 @@
 </head>
 <body>
 <h1>All products list</h1>
+@include('includes.messages')
 @foreach($products as $product)
 <div>
-    <ul>
-        <li>{{$product->name}}</li>
-        <li>{{$product->price}}</li>
-        <li>{{$product->created_at}}</li>
+    <ul style="list-style: none">
+        <li style="">Id: {{$product->id}}</li>
+        <li>Name: {{$product->name}}</li>
+        <li>Price: {{$product->price}}</li>
+        <li>Created At: {{$product->created_at}}</li>
     </ul>
 </div>
 <hr>

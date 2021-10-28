@@ -11,15 +11,11 @@
 <body class="container" style="background-color: #6b7280; position: relative">
 <div class="container-fluid">
     @include('includes.messages')
-    @if(Session::has('success'))
-        <div style="display: flex; justify-content: center">
-            {{Session::get('success')}}
-        </div>
-        <div style="display: flex; justify-content: center">
-            <a href="{{route('savedProducts')}}">Go to saved products</a>
-        </div>
-        <br>
-    @endif
+    <div style="display: flex; justify-content: right">
+        <form action="/logOut" method="get">
+            <button name="logOut">Log out</button>
+        </form>
+    </div>
     <form action="/products" method="POST" style="display: flex;justify-content: center;">
         @csrf
         <input type="name" name="name" placeholder="Name">

@@ -1,8 +1,6 @@
 
 @extends('app.master')
 @section('title' , 'Login')
-
-<body class="container">
 @csrf
 @section('content')
     @if(Session::has('error'))
@@ -10,10 +8,12 @@
             {{Session::get('error')}}
         </div>
     @endif
+
     @if(Session::has('success'))
         <div style="display: flex; justify-content: right">
-            <form action="/logOut" method="post">
-                <button name="logOut">Log out</button>
+            <form action="/logout" method="post">
+                @csrf
+                <input type="submit" value="Logout">
             </form>
         </div>
         <div style="display: flex; justify-content: center">
@@ -41,4 +41,4 @@
             </div>
         </form>
 
-    </body>
+@endsection

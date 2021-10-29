@@ -15,5 +15,6 @@ class Products extends Model
     protected $fillable = [
         'name',
         'price',
+        'user_id'
     ];
 }

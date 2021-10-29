@@ -18,7 +18,7 @@ class EnsureTokenIsValid
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Gna login exi');
+            return redirect()->route('login')->with('error', 'You must be logged in');
         }
         return $next($request);
     }

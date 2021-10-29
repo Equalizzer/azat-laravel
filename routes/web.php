@@ -42,14 +42,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/products', [UserController::class, 'getProducts'])->name('products');
     Route::post('/products', [UserController::class, 'postProducts']);
     Route::get('/savedProducts', [UserController::class, 'getSavedProducts'])->name('savedProducts');
+    Route::post('/savedProducts', [UserController::class, 'postSavedProducts'])->name('savedProducts');
     //Feed
     Route::get('feed', [DashboardController::class, 'getFeed'])->name('feed');
     //Users-list
     Route::get('users', [UserController::class, 'getUsers'])->name('users.list');
 });
 
-//Log out
-Route::post('/login', [AuthenticateSession::class, 'logOut']);
 
+//Route::group(['middleware'=>['LoggedIn']], function(){
+//   //stex grel router@
+//});
+
+
+   Route::post('logout', [UserController::class, 'logOut']);
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar

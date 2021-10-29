@@ -44,10 +44,10 @@ class UserController extends Controller
 //        ]);
 //        dd($validated);
 
+
+
+
         $data = $request->validated();
-        $data['password'] = bcrypt($data['password']);
-
-
         $user = User::create($data);
         return redirect()->route('login')->with('success', 'You have successfully sign up');
     }
@@ -68,29 +68,37 @@ class UserController extends Controller
     public function postProducts(CreateProductsRequest $request)
     {
         $data = $request->validated();
-        $products = Products::create($data);
+        $data['user_id'] = Auth::user()->id;
+        $products = products::create($data);
         return redirect()->route('savedProducts')->with('success', 'You have successfully saved your product');
     }
 
     public function getSavedProducts()
     {
-        $products = Products::get();
+        $products = products::get();
 
         return view("savedProducts", [
-            'products' => $products
+            'products' => products::where('user_id', Auth::user()->id)->get()
         ]);
 
     }
 
-    public function logOut(Request $request)
+    public function logOut()
     {
         Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
         return redirect('login');
+    }
+
+    public function postSavedProducts(Request $request) {
+
+        $prod = products::all();
+
+        $delProduct = $request->only('id');
+
+        $delete = products::where('id', $delProduct)->delete();
+
+        return redirect('savedProducts');
+
     }
 }
 

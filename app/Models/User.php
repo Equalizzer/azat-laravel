@@ -38,4 +38,19 @@ class User extends Authenticatable
     {
         return strtoupper($this->name);
     }
+
+    //get{column}Attribute
+    //accessor
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    //set{column}Attribute
+    //mutator
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 }

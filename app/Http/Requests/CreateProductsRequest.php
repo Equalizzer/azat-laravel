@@ -25,7 +25,9 @@ class CreateProductsRequest extends FormRequest
     {
         return [
             'name'=> 'required|min:3|max:64',
-            'price' => 'required|min:2|max:10'
+            'price' => 'required|min:2|max:900000|numeric',
+            'category_id' => 'required|exists:categories,id',
+
         ];
     }
 }

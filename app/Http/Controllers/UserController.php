@@ -60,28 +60,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function getProducts()
-    {
-        return view('products');
-    }
 
-    public function postProducts(CreateProductsRequest $request)
-    {
-        $data = $request->validated();
-        $data['user_id'] = Auth::user()->id;
-        $products = products::create($data);
-        return redirect()->route('savedProducts')->with('success', 'You have successfully saved your product');
-    }
-
-    public function getSavedProducts()
-    {
-        $products = products::get();
-
-        return view("savedProducts", [
-            'products' => products::where('user_id', Auth::user()->id)->get()
-        ]);
-
-    }
 
     public function logOut()
     {
@@ -89,17 +68,7 @@ class UserController extends Controller
         return redirect('login');
     }
 
-    public function postSavedProducts(Request $request) {
 
-        $prod = products::all();
-
-        $delProduct = $request->only('id');
-
-        $delete = products::where('id', $delProduct)->delete();
-
-        return redirect('savedProducts');
-
-    }
 }
 
 

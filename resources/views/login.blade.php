@@ -1,7 +1,6 @@
 
 @extends('app.master')
 @section('title' , 'Login')
-@csrf
 @section('content')
     @if(Session::has('error'))
         <div class="alert alert-danger">

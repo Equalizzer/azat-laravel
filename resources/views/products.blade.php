@@ -20,6 +20,11 @@
         @csrf
         <input type="name" name="name" placeholder="Name">
         <input type="number" name="price" placeholder="Price">
+        <select name="category_id" id="">
+            @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
         <input type="submit" value="Save">
     </form>
 </div>

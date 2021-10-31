@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use App\Http\Controllers\UserController;
 use Illuminate\Session\Middleware\AuthenticateSession;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,8 +27,6 @@ Route::get('/home', function () {
 });
 
 
-
-
 //Login
 Route::post('/login', [UserController::class, 'postLogin'])->name('login');
 Route::get('/login', [UserController::class, 'getLogin']);
@@ -36,13 +36,12 @@ Route::get('/sign-up', [UserController::class, 'getSignUp'])->name('user.signup'
 Route::post('/sign-up', [UserController::class, 'postSignUp']);
 
 
-
 Route::middleware('auth')->group(function () {
     //Products
-    Route::get('/products', [UserController::class, 'getProducts'])->name('products');
-    Route::post('/products', [UserController::class, 'postProducts']);
-    Route::get('/savedProducts', [UserController::class, 'getSavedProducts'])->name('savedProducts');
-    Route::post('/savedProducts', [UserController::class, 'postSavedProducts'])->name('savedProducts');
+    Route::get('/products', [ProductsController::class, 'getProducts'])->name('products');
+    Route::post('/products', [ProductsController::class, 'postProducts']);
+    Route::get('/savedProducts', [ProductsController::class, 'getSavedProducts'])->name('savedProducts');
+    Route::post('/savedProducts', [ProductsController::class, 'postSavedProducts'])->name('savedProducts');
     //Feed
     Route::get('feed', [DashboardController::class, 'getFeed'])->name('feed');
     //Users-list
@@ -55,6 +54,6 @@ Route::middleware('auth')->group(function () {
 //});
 
 
-   Route::post('logout', [UserController::class, 'logOut']);
+Route::post('logout', [UserController::class, 'logOut']);
 
 //Route::post('login', 'UserControllerLogin');    //xamp 7.2 i hamar

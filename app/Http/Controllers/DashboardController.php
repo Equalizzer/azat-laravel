@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-//    public function getFeed(){
-//        if (!Auth::check()) {
-//            return redirect()->route('login')->with('error', 'Gna login exi');
-//        }
-//        return view('products');
-//    }
+    public function getFeed()
+    {
+
+        return view('feed', [
+            'products' => Auth::user()->products
+        ]);
+    }
 }

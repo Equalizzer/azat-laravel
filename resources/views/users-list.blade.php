@@ -27,5 +27,11 @@
         </div>
         <hr>
     @endforeach
+<div style="display: flex; justify-content: right">
+    <form action="/logout" method="post">
+        @csrf
+        <input type="submit" value="Logout">
+    </form>
+</div>
 </body>
 </html>

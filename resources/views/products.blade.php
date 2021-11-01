@@ -12,8 +12,9 @@
 <div class="container-fluid">
     @include('includes.messages')
     <div style="display: flex; justify-content: right">
-        <form action="/logOut" method="get">
-            <button name="logOut">Log out</button>
+        <form action="/logout" method="post">
+            @csrf
+            <input type="submit" value="Logout">
         </form>
     </div>
     <form action="/products" method="POST" style="display: flex;justify-content: center;">

@@ -9,12 +9,6 @@
     @endif
 
     @if(Session::has('success'))
-        <div style="display: flex; justify-content: right">
-            <form action="/logout" method="post">
-                @csrf
-                <input type="submit" value="Logout">
-            </form>
-        </div>
         <div style="display: flex; justify-content: center">
             {{Session::get('success')}}
         </div>

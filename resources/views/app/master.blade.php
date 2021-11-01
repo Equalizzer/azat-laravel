@@ -8,7 +8,15 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
-<body>
+<body class="container">
+@if(Auth::check())
+<div style="display: flex; justify-content: right; margin-top: 25px">
+    <form action="/logout" method="post">
+        @csrf
+        <input type="submit" value="Logout">
+    </form>
+</div>
+@endif
 <div class="container-fluid">
     @yield('content')
 </div>

@@ -9,12 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div style="display: flex; justify-content: right">
-    <form action="/logout" method="post">
-        @csrf
-        <input type="submit" value="Logout">
-    </form>
-</div>
 <h1>All users list</h1>
     @foreach($users as $user)
         <div>

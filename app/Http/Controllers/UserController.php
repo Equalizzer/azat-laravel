@@ -37,18 +37,13 @@ class UserController extends Controller
 
     public function postSignUp(CreateUsersRequest $request)
     {
-//        $validated = $request->validate([
-//            'name'=> 'required|min:3|max:64',
-//            'email'=> 'required|email',
-//            'password'=> 'required|min:4'
-//        ]);
-//        dd($validated);
-
-
-
-
         $data = $request->validated();
         $user = User::create($data);
+
+        $imagePath = $data['img']->store('profile_images');
+        $user->img_path = $imagePath;
+        $user->save();
+
         return redirect()->route('login')->with('success', 'You have successfully sign up');
     }
 

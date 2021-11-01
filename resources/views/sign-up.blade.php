@@ -11,11 +11,12 @@
 <body class="container" style="background-color: #6b7280; position: relative">
 <div class="container-fluid">
     @include('includes.messages')
-    <form action="/sign-up" method="POST" style="display: flex;justify-content: center;">
+    <form action="/sign-up" method="POST" style="display: flex;justify-content: center;" enctype="multipart/form-data">
         @csrf
         <input type="name" name="name" placeholder="Name">
         <input type="email" name="email" placeholder="Your Email">
         <input type="password" name="password" placeholder="Your Password">
+        <input type="file" name="img">
         <input type="submit" value="Sign Up">
     </form>
 </div>

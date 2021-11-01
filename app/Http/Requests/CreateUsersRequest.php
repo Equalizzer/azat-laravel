@@ -26,7 +26,8 @@ class CreateUsersRequest extends FormRequest
         return [
             'name'=> 'required|min:3|max:64',
             'email'=> 'required|email',
-            'password'=> 'required|min:4'
+            'password'=> 'required|min:4',
+            'img' => 'file|mimes:jpg,png|max:2048'  //kb
         ];
     }
 }

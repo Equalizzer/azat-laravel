@@ -15,7 +15,7 @@ class CarController extends Controller
     public function getCars()
     {
         return view('cars', [
-            'cars' => Car::all()
+            'cars' => Car::where('user_id', Auth::user()->id)->get()
         ]);
     }
 

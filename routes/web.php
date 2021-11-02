@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use App\Http\Controllers\UserController;
 use Illuminate\Session\Middleware\AuthenticateSession;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::get('feed', [DashboardController::class, 'getFeed'])->name('feed');
     //Users-list
     Route::get('users', [UserController::class, 'getUsers'])->name('users.list');
+
+    //Cars
+    Route::get('/cars', [CarController::class, 'getCars'])->name('cars');
+    Route::post('/cars', [CarController::class, 'postCars']);
+    Route::get('/cars-list', [CarController::class, 'getCarsList'])->name('cars-list');
+    Route::post('/cars-list', [CarController::class, 'postCarsList'])->name('cars-list');
+
 });
 
 

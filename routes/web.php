@@ -51,8 +51,8 @@ Route::middleware('auth')->group(function () {
     //Cars
     Route::get('/cars', [CarController::class, 'getCars'])->name('cars');
     Route::post('/cars', [CarController::class, 'postCars']);
-    Route::get('/cars-list', [CarController::class, 'getCarsList'])->name('getCars-list');
-    Route::post('/cars-list', [CarController::class, 'postCarsList'])->name('postCars-list');
+    Route::get('/cars-list', [CarController::class, 'getCarsList'])->name('getCarsList');
+    Route::post('/cars-list', [CarController::class, 'postCarsList'])->name('postCarsList');
 
 });
 

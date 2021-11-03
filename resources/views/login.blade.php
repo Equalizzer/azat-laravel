@@ -21,6 +21,7 @@
         <div style="display: flex; justify-content: center">
             <a href="{{route('products')}}" style="text-decoration: none">Go to Add Products</a>
         </div>
+
         <br>
     @endif
     <a href="sign-up" style="justify-content: flex-start; margin-left: 20px; text-decoration: none">Go to sign up</a>

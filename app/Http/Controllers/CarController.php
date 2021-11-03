@@ -24,7 +24,7 @@ class CarController extends Controller
         $data = $request->validated();
         $data['user_id'] = Auth::user()->id;
         $cars = Car::create($data);
-        return redirect()->route('cars-list')->with('success', 'You have successfully saved your car');
+        return redirect()->route('getCarsList')->with('success', 'You have successfully saved your car');
     }
 
     public function getCarsList()

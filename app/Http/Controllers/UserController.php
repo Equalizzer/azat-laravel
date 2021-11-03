@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserCreatedEvent;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\products;
@@ -44,6 +45,8 @@ class UserController extends Controller
         $user->img_path = $imagePath;
         $user->save();
 
+        event(new UserCreatedEvent($user));
+
         return redirect()->route('login')->with('success', 'You have successfully sign up');
     }
 
@@ -62,6 +65,15 @@ class UserController extends Controller
         Auth::logout();
         return redirect('login');
     }
+
+
+    //php artisan make:event UserCreatedEvent
+    //php artisan make:listener UserCreatedListener
+    //php artisan event:generate UserCreated        esi sarquma verevi erkus@ , imanal
+
+
+    //php artisan queue:work
+    //php artisan queue:retry all
 
 
 }

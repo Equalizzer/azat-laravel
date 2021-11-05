@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\EnsureTokenIsValid;
 use App\Http\Controllers\UserController;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use App\Http\Controllers\CarController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::get('/login', [UserController::class, 'getLogin']);
 
 //Sign-up
 Route::get('/sign-up', [UserController::class, 'getSignUp'])->name('user.signup');
-Route::post('/sign-up', [UserController::class, 'postSignUp']);
+Route::post('/sign-up', [UserController::class, 'store']);
 
 
 Route::middleware('auth')->group(function () {
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/cars-list', [CarController::class, 'getCarsList'])->name('getCarsList');
     Route::post('/cars-list', [CarController::class, 'postCarsList'])->name('postCarsList');
 
+    //Update
+    Route::get('/users/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('users' , [UserController::class, 'update']);
 });
 
 

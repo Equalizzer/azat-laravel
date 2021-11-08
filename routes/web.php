@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('feed', [DashboardController::class, 'getFeed'])->name('feed');
     //Users-list
     Route::get('users', [UserController::class, 'getUsers'])->name('users.list');
+    Route::delete('users',[UserController::class,'delete']);
 
     //Cars
     Route::get('/cars', [CarController::class, 'getCars'])->name('cars');

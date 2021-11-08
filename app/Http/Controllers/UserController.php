@@ -59,7 +59,6 @@ class UserController extends Controller
     }
 
 
-
     public function logOut()
     {
         Auth::logout();
@@ -76,12 +75,33 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
-        Auth::user()->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email'],
+            'current_password' => ['required', 'current_password'],
+            'password' => ['nullable', 'confirmed']
         ]);
+
+        $user = Auth::user();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        if ($request->has('password')) {
+            $user->password = $request->input('password');
+        }
+        $user->save();
+        return redirect()->back();
+    }
+
+    public function delete(Request $request)
+    {
+        $users = USER::all();
+
+        $delUsers = $request->only('id');
+
+        $delete = User::where('id', $delUsers)->delete();
+
+        return redirect('users');
     }
 
 

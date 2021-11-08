@@ -14,6 +14,7 @@
         <div>
             <ul style="list-style: none">
                 <li>Name: {{$user->name}}</li>
+                <li>ID: {{$user->id}}</li>
                 <li>OG Name: {{$user->getRawOriginal('name')}}</li>
                 <li>Email: {{$user->email}}</li>
                 <li>Created At: {{$user->created_at}}</li>
@@ -21,6 +22,12 @@
         </div>
         <hr>
     @endforeach
+<form action="/users" method="POST" class="delete">
+    @csrf
+    @method('delete')
+    <input type="text" name="id" placeholder="ID">
+    <input type="submit" value="delete">
+</form>
 <div style="display: flex; justify-content: right">
     <form action="/logout" method="post">
         @csrf

@@ -75,9 +75,9 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, [
+        $validatedData = $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email'],
+            'email' => ['required' ,'email' , 'unique:users,email,' .Auth::user()->id ],
             'current_password' => ['required', 'current_password'],
             'password' => ['nullable', 'confirmed']
         ]);

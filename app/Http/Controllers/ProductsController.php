@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProductsRequest;
 use App\Models\Category;
 use App\Models\Products;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,8 +43,24 @@ class ProductsController extends Controller
         $products = Products::get();
 
         return view("savedProducts", [
-            'products' => Products::where('user_id', Auth::user()->id)->get()
+            'products' => (new ProductService())->getUserProducts(Auth::user())
         ]);
 
     }
+
+    public function getApiProducts()
+    {
+        return response()->json(
+            (new ProductService())->getUserProducts(Auth::user())
+        );
+    }
+
+    public function storeApi(Request $request)
+    {
+        $data = $request->validated();
+        $data['user_id'] = Auth::user()->id;
+        $products = Products::create($data);
+        return response()->json($products);
+    }
+
 }
